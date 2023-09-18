@@ -8,6 +8,7 @@ import sys.dao.EmpleadoDAO;
 import sys.modelo.Empleado;
 import sys.util.HibernateUtil;
 
+
 /**
  *
  * @author Alex
@@ -23,10 +24,12 @@ public class EmpleadoDAOImpl implements EmpleadoDAO{
         try {
             empleados = session.createQuery(hql).list();
             trans.commit();
-            session.close();
+           
         } catch (Exception ex) {
             ex.printStackTrace();
             trans.rollback();
+        }finally{
+             session.close();
         }
         return empleados;
         
@@ -43,17 +46,41 @@ public class EmpleadoDAOImpl implements EmpleadoDAO{
         } catch (Exception ex) {
             ex.printStackTrace();
             session.getTransaction().rollback();
+        }finally{
+            session.close();
         }
     }
 
     @Override
     public void update(Empleado empleado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = null;
+        try {
+            session=HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.update(empleado);
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            session.getTransaction().rollback();
+        }finally{
+            session.close();
+        }
     }
 
     @Override
     public void delete(Empleado empleado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = null;
+        try {
+            session=HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.delete(empleado);
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            session.getTransaction().rollback();
+        }finally{
+            session.close();
+        }
     }
     
 }

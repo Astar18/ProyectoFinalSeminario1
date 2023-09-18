@@ -1,5 +1,5 @@
 package sys.modelo;
-// Generated 17/09/2023 23:22:20 by Hibernate Tools 4.3.1
+// Generated 16/09/2023 21:51:52 by Hibernate Tools 4.3.1
 
 
 
@@ -10,17 +10,17 @@ public class Usuario  implements java.io.Serializable {
 
 
      private Integer codUsuario;
+     private Vendedor vendedor;
      private String nombreUsuario;
      private String password;
-     private int codVendedor;
 
     public Usuario() {
     }
 
-    public Usuario(String nombreUsuario, String password, int codVendedor) {
+    public Usuario(Vendedor vendedor, String nombreUsuario, String password) {
+       this.vendedor = vendedor;
        this.nombreUsuario = nombreUsuario;
        this.password = password;
-       this.codVendedor = codVendedor;
     }
    
     public Integer getCodUsuario() {
@@ -29,6 +29,13 @@ public class Usuario  implements java.io.Serializable {
     
     public void setCodUsuario(Integer codUsuario) {
         this.codUsuario = codUsuario;
+    }
+    public Vendedor getVendedor() {
+        return this.vendedor;
+    }
+    
+    public void setVendedor(Vendedor vendedor) {
+        this.vendedor = vendedor;
     }
     public String getNombreUsuario() {
         return this.nombreUsuario;
@@ -43,13 +50,6 @@ public class Usuario  implements java.io.Serializable {
     
     public void setPassword(String password) {
         this.password = password;
-    }
-    public int getCodVendedor() {
-        return this.codVendedor;
-    }
-    
-    public void setCodVendedor(int codVendedor) {
-        this.codVendedor = codVendedor;
     }
 
 
